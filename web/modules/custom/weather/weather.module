@@ -4,18 +4,15 @@
  * Implements hook_theme().
  */
 
-function weather_theme() {
+function weather_theme($existing, $type, $theme, $path) {
   return [
-   'weather_form_block' => [
+   'weather' => [
       'variables' => [
-        'app' => NULL, 
-        'temp_min' => NULL,
-        'temp_max' =>NULL,
-        'pressure' => NULL,
-        'humidity' => NULL,
-        'wind' => NULL,
+        'markup' => NULL, 
+        'image'  => NULL,
+        'city' => NULL,
       ],
-      'template' => 'weather_data',
+    'template' => 'weather_data',
     ],
   ];
 }

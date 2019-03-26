@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Profile weather block.
+ */
+#}
+{{ attach_library('weather/weather') }}
+<div class= "new">Some markup </div>
+
+
+
+
+<div class="new-background" style="background-image: url('{{ file_url(image) }}');">
+  <div class="hellocity">
+  <h1>{{ city }}</h1>
+  </div>
+  <div class="description">
+  <h1>{{ description }}</h1>
+  </div>
+</div>

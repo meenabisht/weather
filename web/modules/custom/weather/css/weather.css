@@ -1,0 +1,23 @@
+.new{
+	color: red;
+}
+
+.hello{
+	color: darkblue;
+}
+
+.new-background{
+	background-size: cover;
+	height: 500px;
+	width:100%;
+	display:flex;
+}
+
+ 
+.new-background .hellocity{
+	width:50%;
+}
+
+.new-background .description{
+	width:50%;
+}

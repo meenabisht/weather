@@ -25,20 +25,35 @@ class WeatherFormBlock extends BlockBase {
 
   public function build() {
     $config = $this->getConfiguration();
-    print_r($config['city']);
+    $city = $config['city'];
+    print_r($city);
+
+    $image = $config['image'];
+    $file = File::load($image[0]);
+    $imageurl = $file->getFileUri();
+    print_r($imageurl);
+
     $app = \Drupal::config('weather.settings');
     $app = $app->get('app');
     $service = \Drupal::service('weather.test_service');
     $ress = $service->WeatherMethod($config['city']);
     $result = Json::decode($ress);
     print_r($result);
-    $markup = $this->t($app).'</br>';
-    $markup .= $this->t((string) $result['main']['temp_min']).'</br>';
-    $markup .= $this->t((string) $result['main']['temp_max']).'</br>';
-    $markup .= $this->t((string) $result['main']['pressure']).'</br>';
-    $markup .= $this->t((string) $result['main']['humidity']).'</br>';
-    $markup .= $this->t((string) $result['wind']['speed']).'</br>'; 
+
+    $description = $config['description'];
+    print_r($description);
+
+    
+    $markup = 'Min Temp'.$this->t((string) $result['main']['temp_min']).'</br>';
+    $markup .= 'Max Temp'.$this->t((string) $result['main']['temp_max']).'</br>';
+    $markup .= 'Pressure'.$this->t((string) $result['main']['pressure']).'</br>';
+    $markup .= 'Humidity'.$this->t((string) $result['main']['humidity']).'</br>';
+    $markup .= 'Speed'.$this->t((string) $result['wind']['speed']).'</br>'; 
     return [
+      '#theme' => 'weather',
+      '#image'  => $imageurl,
+      '#city' => $city,
+      '#description' => $description,
       '#type' => 'markup',
       '#markup' => $markup,
     ];
@@ -86,6 +101,7 @@ class WeatherFormBlock extends BlockBase {
     ];
 
     return $form;
+    
   }
 
   /**
