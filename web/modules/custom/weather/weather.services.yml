@@ -1,0 +1,4 @@
+services:
+  weather.test_service:
+    class: Drupal\weather\WeatherService
+    arguments: ['@http_client']

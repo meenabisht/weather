@@ -1,0 +1,7 @@
+weather.form:
+  path: /weather/myform
+  defaults:
+    _title: 'Weather form'
+    _form: '\Drupal\weather\Form\WeatherForm'
+  requirements:
+   _permission: 'access content'

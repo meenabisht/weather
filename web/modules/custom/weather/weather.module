@@ -1,0 +1,16 @@
+<?php
+
+
+function weather_theme() {
+  return [
+   'weather_form_block' => [
+      'variables' => [
+        'city' => NULL, 
+        'min_temp' => NULL,
+        'description' => NULL,
+        'image' =>NULL,
+      ],
+      'template' => 'weather_data',
+    ],
+  ];
+}
