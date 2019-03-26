@@ -12,6 +12,6 @@ class WeatherService {
     // kint($response->getBody()->getContents());
     // kint($response);
     // exit();
-    return json_decode($response->getBody()->getContents());
+    return $response->getBody()->getContents();
   }
 }

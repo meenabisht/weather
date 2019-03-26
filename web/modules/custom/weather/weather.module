@@ -1,14 +1,19 @@
 <?php
 
+/**
+ * Implements hook_theme().
+ */
 
 function weather_theme() {
   return [
    'weather_form_block' => [
       'variables' => [
-        'city' => NULL, 
-        'min_temp' => NULL,
-        'description' => NULL,
-        'image' =>NULL,
+        'app' => NULL, 
+        'temp_min' => NULL,
+        'temp_max' =>NULL,
+        'pressure' => NULL,
+        'humidity' => NULL,
+        'wind' => NULL,
       ],
       'template' => 'weather_data',
     ],

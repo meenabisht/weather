@@ -1,14 +1,17 @@
 {
-  "name": "boot_theme",
+  "name": "weather_bootstrap",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "meena bisht",
+  "author": "meenabisht",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^4.0.0"
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-sass": "^4.0.2"
   }
 }

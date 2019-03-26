@@ -5,9 +5,7 @@ namespace Drupal\weather\Plugin\Block;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\file\Entity\File;
-// use Drupal\weather\WeatherService;
-// use Symfony\Component\DependencyInjection\ContainerInterface;
-// use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 
@@ -24,27 +22,29 @@ class WeatherFormBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  // protected $newservice;
-  
-  // public function __construct(WeatherService $newservice) {
-  //   $this->newservice = $newservice;
-  // }
-
-  // public static function create(ContainerInterface $container) {
-  //   return new static(
-  //     $container->get('weather.test_service')
-  //   );
-  // }
-
 
   public function build() {
+    $config = $this->getConfiguration();
+    print_r($config['city']);
     $app = \Drupal::config('weather.settings');
-    $a = $app->get('app');
-    
-    
+    $app = $app->get('app');
     $service = \Drupal::service('weather.test_service');
-    $ress = $service->WeatherMethod('pune');
-    print_r($ress);
+    $ress = $service->WeatherMethod($config['city']);
+    $result = Json::decode($ress);
+    print_r($result);
+    $markup = $this->t($app).'</br>';
+    $markup .= $this->t((string) $result['main']['temp_min']).'</br>';
+    $markup .= $this->t((string) $result['main']['temp_max']).'</br>';
+    $markup .= $this->t((string) $result['main']['pressure']).'</br>';
+    $markup .= $this->t((string) $result['main']['humidity']).'</br>';
+    $markup .= $this->t((string) $result['wind']['speed']).'</br>'; 
+    return [
+      '#type' => 'markup',
+      '#markup' => $markup,
+    ];
+    
+
+    
   }
 
   protected function blockAccess(AccountInterface $account) {
@@ -84,6 +84,7 @@ class WeatherFormBlock extends BlockBase {
       '#description' => t('The image to display'),
       '#required' => true
     ];
+
     return $form;
   }
 
@@ -92,8 +93,6 @@ class WeatherFormBlock extends BlockBase {
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     
-    // kint($form_state->getValue('city'));
-    // exit();
     $this->configuration['weather'] = $form_state->getValue('weather');
     
     $image = $form_state->getValue('image');
@@ -102,8 +101,8 @@ class WeatherFormBlock extends BlockBase {
     $file->save();
     
     // Save configurations.
-    $this->setConfigurationValue['city'] = $form_state->getValue('city');
-    $this->setConfigurationValue['description'] = $form_state->getValue('description');
-    $this->setConfigurationValue['image'] = $form_state->getValue('image');
+    $this->setConfigurationValue('city' , $form_state->getValue('city'));
+    $this->setConfigurationValue('description' , $form_state->getValue('description'));
+    $this->setConfigurationValue('image' , $form_state->getValue('image'));
   }
 }
