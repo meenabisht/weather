@@ -40,26 +40,30 @@ class WeatherFormBlock extends BlockBase {
     $result = Json::decode($ress);
     print_r($result);
 
-    $description = $config['description'];
+    $description = $config['description']['value'];
+    // $description = $desc['value'];
     print_r($description);
 
     
-    $markup = 'Min Temp'.$this->t((string) $result['main']['temp_min']).'</br>';
-    $markup .= 'Max Temp'.$this->t((string) $result['main']['temp_max']).'</br>';
-    $markup .= 'Pressure'.$this->t((string) $result['main']['pressure']).'</br>';
-    $markup .= 'Humidity'.$this->t((string) $result['main']['humidity']).'</br>';
-    $markup .= 'Speed'.$this->t((string) $result['wind']['speed']).'</br>'; 
+    $mintemp = $this->t((string) $result['main']['temp_min']);
+    $maxtemp = $this->t((string) $result['main']['temp_max']);
+    $pressure = $this->t((string) $result['main']['pressure']);
+    $humid = $this->t((string) $result['main']['humidity']);
+    $speed = $this->t((string) $result['wind']['speed']); 
     return [
       '#theme' => 'weather',
       '#image'  => $imageurl,
       '#city' => $city,
       '#description' => $description,
-      '#type' => 'markup',
-      '#markup' => $markup,
-    ];
-    
+      '#mintemp' =>  $mintemp,
+      '#maxtemp'  =>  $maxtemp,
+      '#pressure' => $pressure,
+      '#humid'   =>  $humid,
+      '#speed'   =>  $speed,
 
-    
+      // '#type' => 'markup',
+      // '#markup' => $markup,
+    ];    
   }
 
   protected function blockAccess(AccountInterface $account) {
@@ -108,7 +112,9 @@ class WeatherFormBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    
+    // $abs = $form_state->getValue('description');
+    // kint($abs['value']);
+    // exit();
     $this->configuration['weather'] = $form_state->getValue('weather');
     
     $image = $form_state->getValue('image');

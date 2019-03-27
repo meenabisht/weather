@@ -10,9 +10,9 @@
 	background-size: cover;
 	height: 500px;
 	width:100%;
-	display:flex;
+  display:flex;
+  border-radius: 20px;
 }
-
  
 .new-background .hellocity{
 	width:50%;
@@ -21,3 +21,25 @@
 .new-background .description{
 	width:50%;
 }
+
+.wrapper{ 
+  border-bottom: 12px solid grey;
+  border-right: 12px solid grey;
+  border-radius: 20px;
+}
+
+.mainwrapper{
+	width:100%;
+	display: flex;
+}
+.mainwrapper .weather_data{
+  width:20%;
+  font-size:35px;
+  text-align: center;
+  background-color: white;
+  border-left: black;
+  border-bottom: black;
+}
+
+   
+   

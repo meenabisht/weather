@@ -7,9 +7,7 @@
 {{ attach_library('weather/weather') }}
 <div class= "new">Some markup </div>
 
-
-
-
+<div class = "wrapper">
 <div class="new-background" style="background-image: url('{{ file_url(image) }}');">
   <div class="hellocity">
   <h1>{{ city }}</h1>
@@ -17,4 +15,24 @@
   <div class="description">
   <h1>{{ description }}</h1>
   </div>
+</div>
+
+<div class="mainwrapper">
+   <div class="weather_data">
+      min temp<h1> {{ mintemp }}</h1>
+   </div>
+   <div class="weather_data">
+      max temp<h1> {{ maxtemp }}</h1>
+   </div>
+   <div class="weather_data">
+      pressure<h1> {{ pressure }}</h1>
+   </div>
+   <div class="weather_data">
+      humidity<h1> {{ humid }}</h1>
+   </div>
+   <div class="weather_data">
+      wind<h1> {{ speed }}</h1>
+   </div>
+</div>
+
 </div>

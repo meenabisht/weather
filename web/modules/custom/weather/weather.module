@@ -10,7 +10,14 @@ function weather_theme($existing, $type, $theme, $path) {
       'variables' => [
         'markup' => NULL, 
         'image'  => NULL,
+        'description' => NULL,
         'city' => NULL,
+        'mintemp' =>  NULL,
+        'maxtemp'  =>  NULL,
+        'pressure' => NULL,
+        'humid'   =>  NULL,
+        'speed'   =>  NULL,
+
       ],
     'template' => 'weather_data',
     ],
